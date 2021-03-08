@@ -1,53 +1,21 @@
-import sys
 import os
 import logging
 import time
 import pathlib
-import arcpy
-import csv
+
+import condo
+
 
 def main(sourcesdeconn
         ,outputdir):
 
-    # https://pro.arcgis.com/en/pro-app/latest/tool-reference/conversion/table-to-table.htm
+        sourcecondo = condo.Condo()
 
-    condotable = os.path.join(sourcesdeconn, 'DOF_TAXMAP.Condo')
-    condocsv = os.path.join(outputdir,'condo.csv')
+        sourcecondo.extracttofile('DOF_TAXMAP.Condo'
+                                  ,outputdir
+                                  ,'condo.csv')
 
-    # https://pro.arcgis.com/en/pro-app/latest/arcpy/classes/fieldmappings.htm
-    # how many lines does it take to declare SELECT column1, column2 from X?
-    fms = arcpy.FieldMappings()
-    fm_base_bbl = arcpy.FieldMap()
-    fm_billing_bbl = arcpy.FieldMap()
-    fm_base_bbl.addInputField(condotable, 'CONDO_BASE_BBL')
-    fm_billing_bbl.addInputField(condotable, 'CONDO_BILLING_BBL')
-
-    base_bbl_name = fm_base_bbl.outputField
-    base_bbl_name.name = 'CONDO_BASE_BBL'
-    fm_base_bbl.outputField = base_bbl_name
-
-    billing_bbl_name = fm_billing_bbl.outputField
-    billing_bbl_name.name = 'CONDO_BILLING_BBL'
-    fm_billing_bbl.outputField = billing_bbl_name
-
-    fms.addFieldMap(fm_base_bbl)
-    fms.addFieldMap(fm_billing_bbl)
-    # 13?
-
-    if os.path.exists(condocsv):
-        os.remove(condocsv)
-
-    arcpy.conversion.TableToTable(condotable
-                                 ,outputdir
-                                 ,'condo.csv'
-                                 ,"""CONDO_BASE_BBL IS NOT NULL AND CONDO_BILLING_BBL IS NOT NULL"""
-                                 ,fms)
-
-    with open(condocsv, newline='') as csvfile:
-        condocsvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        csvkount = sum(1 for row in condocsvreader)
-    
-    return (csvkount - 1)
+        return sourcecondo.countcondos()  
 
 
 if __name__ == '__main__':
