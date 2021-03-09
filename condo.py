@@ -1,7 +1,6 @@
 import os
 import arcpy
 import csv
-from pathlib import Path
 
 class Condo(object):
 
