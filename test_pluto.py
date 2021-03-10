@@ -10,8 +10,6 @@ class PlutoTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(self):
 
-        # mock the SDE environmental ala
-        #C:\matt_projects\geodatabase-buildings-condoetl\data\testdata\testdata.gdb\Condo
         self.datadirectory = os.path.join(pathlib.Path(__file__).parent
                                          ,'data'
                                          ,'testdata')
@@ -37,7 +35,7 @@ class PlutoTestCase(unittest.TestCase):
     def test_cextractcondosql(self):
 
         self.testpluto.extractcondosql()
-        self.assertTrue(pathlib.Path(self.testpluto.plutobbls).is_file())
+        self.assertTrue(pathlib.Path(self.testpluto.condosqls).is_file())
 
     
 if __name__ == '__main__':
