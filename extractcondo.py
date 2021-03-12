@@ -24,10 +24,10 @@ if __name__ == '__main__':
         
     timestr = time.strftime("%Y%m%d-%H%M%S")
 
-    if locals().get('TARGETLOGDIR'):
+    try:
         targetlog = os.path.join(os.environ['TARGETLOGDIR'] 
                                 ,'extractcondo-{0}.log'.format(timestr)) 
-    else:
+    except:
         targetlog = os.path.join(os.getcwd() 
                                 ,'extractcondo-{0}.log'.format(timestr))
 
@@ -49,5 +49,9 @@ if __name__ == '__main__':
 
     if (kount == 0 or kount is None):
         logging.error('Failed to extract any condos')
+        retval = 1
     else:
         logging.info('Successfully extracted {0} bbls to data directory'.format(kount))
+        retval = 0
+
+    exit(retval)

@@ -69,10 +69,14 @@ class Pluto(object):
                     # 1015377501.0
                     condos.append(str(bbl)[0:10])    
 
+        kount = 0
         with open(self.condosqls, 'w') as f:
             for condo in condos:
+                kount = kount + 1
                 f.write('insert into pluto_load values({0});{1}'.format(condo,'\n'))            
             f.write('commit;{0}'.format('\n'))
+
+        self.condocount = kount
 
     def cleanworkfiles(self):
 
@@ -93,10 +97,12 @@ class Pluto(object):
         if os.path.exists(self.condosqls):
             os.remove(self.condosqls)
 
-    def downloadandextract(self):
+    def downloadextractcondosql(self):
 
         self.download()
         self.extractbbls()
         self.extractcondosql()
         self.cleanworkfiles()
+
+        return self.condocount
 

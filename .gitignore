@@ -164,3 +164,8 @@ scratch/
 # this repos csv detritus
 *.csv
 *.csv.xml
+# this repo ESRI detritus
+data/info/
+data/*.ini
+# this repo work files
+data/*.sql

@@ -6,9 +6,10 @@ and NYC Dept. of City Planning [PLUTO](https://github.com/NYCPlanning/db-pluto).
 Friends, this our condo dataset refresh using two agency inputs, our rules, the 
 trick is never to be afraid.
 
-We will refresh the DoITT condo dataset once a month with each PLUTO release. We
-update buildings with mappluto_bbls every day, so DoITT buildings will always 
-reflect the latest legal PLUTO values. 
+We will refresh the DoITT condo dataset with every PLUTO release from the Dept.
+of City Planning, matching PLUTO with live Dept. of Finance Condos. We
+update buildings with all mappluto_bbls every day, so DoITT buildings will always 
+reflect the latest legal MapPLUTO values. 
 
 ## Inputs and Dependencies
 
