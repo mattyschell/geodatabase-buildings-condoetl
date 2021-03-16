@@ -1,7 +1,9 @@
 set SDEFILE=XX:\GIS\Internal\Connections\oracle11g\stg\dof_readonly@geocstg.sde
 set TARGETBLDGSDE=XX:\GIS\Internal\Connections\oracle19c\dev\GIS-ditGSdv1\bldg.sde
 set PLUTOVERSION=21v1
-set NOTIFY=xx@yy.zz.gov
+set NOTIFY=xxxx@yyyy.zzzz.gov
+set NOTIFYFROM=aaaa@bbbb.cccc.gov
+set SMTPFROM=foo.bar
 set TARGETLOGDIR=C:\Temp\logpile\
 set BATLOG=%TARGETLOGDIR%geodatabase-buildings-condoetl.log
 set ETL=C:\matt_projects\geodatabase-buildings-condoetl\
