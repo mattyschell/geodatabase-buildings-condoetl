@@ -20,7 +20,8 @@ class PlutoTestCase(unittest.TestCase):
     @classmethod
     def tearDownClass(self):
         
-        self.testpluto.cleanallfiles()
+        pass
+        #self.testpluto.cleanallfiles()
 
     def test_adownload(self):
 

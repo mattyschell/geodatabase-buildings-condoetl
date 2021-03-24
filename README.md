@@ -6,10 +6,10 @@ and NYC Dept. of City Planning [PLUTO](https://github.com/NYCPlanning/db-pluto).
 Friends, this our condo dataset refresh using two agency inputs, our rules, the 
 trick is never to be afraid.
 
-We will refresh the DoITT condo dataset with every PLUTO release from the Dept.
-of City Planning, matching PLUTO with live Dept. of Finance Condos. We
-update buildings with all mappluto_bbls every day, so DoITT buildings will always 
-reflect the latest legal MapPLUTO values. 
+We will refresh the DoITT condo dataset with each PLUTO release from the Dept.
+of City Planning, matching PLUTO to current Dept. of Finance Condos. We
+update DoITT's live buildings with all condominium "billing" boro/block/lots 
+daily, so DoITT buildings will always reflect the latest legal MapPLUTO values. 
 
 ## Inputs and Dependencies
 
@@ -31,22 +31,31 @@ execute it.
 
 ### 1. Extract Taxmap Base BBL, Condo Billing BBLs
 
+The source Dept. of Finance data may move, so this step is remain loosely coupled.
+
 ```
-> set SDEFILE=T:\GIS\Internal\Connections\oracle11g\dev\dof_readonly.sde
-> set PYTHONPATH=C:\geodatabase-toiler\src\py
+> set SDEFILE=X:\gis\connections\oracle11g\dev\dof_readonly.sde
+> set TARGETLOGDIR=X:\gis\geodatabase-scripts\logs\condoetl
 > c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat extractcondo.py
 ```
 
 ### 2. Extract PLUTO Condo BBLs
 
+Assumes that PLUTO will be available as a comma-separated file at a URL that we can retrieve.
+
 ```
-> c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat extractpluto.py 21V1
+> set PLUTOVERSION=21v1
+> set TARGETLOGDIR=X:\gis\geodatabase-scripts\logs\condoetl
+> c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat extractpluto.py
 ```
 
 ### 3. Finalize BBL List and Load to Geodatabase Buildings Schema
 
+Refresh the DoITT condo table with Dept. of Finance condos that also exist in PLUTO. Requires a target schema and the [geodatabase-toiler](https://github.com/mattyschell/geodatabase-toiler) utilities.
+
 ```
-> set SDEFILE=T:\GIS\Internal\Connections\oracle19c\dev\GIS-ditGSdv1\bldg.sde
-> set PYTHONPATH=C:\geodatabase-toiler\src\py
+> set SDEFILE=X:\gis\connections\xx\xxx.sde
+> set TOILER=X:\gis\geodatabase-toiler\
+> set PYTHONPATH=%PYTONPATH%;%TOILER%\src\py
 > c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat loadcondo.py
 ```
