@@ -16,22 +16,36 @@ daily, so DoITT buildings will always reflect the latest legal MapPLUTO values.
 * SDE file connection to the source DOF_READONLY oracle schema
 * SDE file connection to the target [geodatabase-buildings](https://github.com/mattyschell/geodatabase-buildings) 
 * [ESRI ArcGIS Pro python 3.x](https://pro.arcgis.com/en/pro-app/arcpy/get-started/installing-python-for-arcgis-pro.htm) 
+* [Geodatabase Toiler](https://github.com/mattyschell/geodatabase-toiler) repository
 * Internet access to the Department of City Planning downloads page like:
     * https://www1.nyc.gov/assets/planning/download/zip/data-maps/open-data/nyc_pluto_YYvX_csv.zip
+
 
 
 ## Full ETL
 
 Update the variables at the beginning of geodatabase-scripts\sample_etl.bat and
-execute it.
+execute it.  See below for a breakdown of individual steps.
 
 ```
 > \geodatabase-scripts\sample_etl.bat
 ```
 
-### 1. Extract Taxmap Base BBL, Condo Billing BBLs
+## Tests
 
-The source Dept. of Finance data may move, so this step is remain loosely coupled.
+This is a poorly designed combination of integration tests and regression tests. 
+You probably only want to run this if you work on the DoITT GIS team and have
+all of the usual licensing, connection files, and data available. 
+
+Update the variables at the beginning of the batch file.
+
+```
+> testall.bat
+```
+
+## 1. Extract Taxmap Base BBL, Condo Billing BBLs
+
+The source Dept. of Finance data may move, so this step must be loosely coupled.
 
 ```
 > set SDEFILE=X:\gis\connections\oracle11g\dev\dof_readonly.sde
@@ -39,9 +53,10 @@ The source Dept. of Finance data may move, so this step is remain loosely couple
 > c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat extractcondo.py
 ```
 
-### 2. Extract PLUTO Condo BBLs
+## 2. Extract PLUTO Condo BBLs
 
-Assumes that PLUTO will be available as a comma-separated file at a URL that we can retrieve.
+Assumes that [PLUTO](https://github.com/NYCPlanning/db-pluto) will be available 
+as a comma-separated file at a URL that we can retrieve.
 
 ```
 > set PLUTOVERSION=21v1
@@ -49,9 +64,10 @@ Assumes that PLUTO will be available as a comma-separated file at a URL that we 
 > c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat extractpluto.py
 ```
 
-### 3. Finalize BBL List and Load to Geodatabase Buildings Schema
+## 3. Finalize BBL List and Load to Geodatabase Buildings Schema
 
-Refresh the DoITT condo table with Dept. of Finance condos that also exist in PLUTO. Requires a target schema and the [geodatabase-toiler](https://github.com/mattyschell/geodatabase-toiler) utilities.
+Refresh the DoITT condo table with Dept. of Finance condos that also exist in 
+PLUTO. Requires a target schema and utilites in [geodatabase-toiler](https://github.com/mattyschell/geodatabase-toiler).
 
 ```
 > set SDEFILE=X:\gis\connections\xx\xxx.sde
