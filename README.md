@@ -52,6 +52,7 @@ The source Dept. of Finance data may move, so this step must be loosely coupled.
 > set TARGETLOGDIR=X:\gis\geodatabase-scripts\logs\condoetl
 > c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat extractcondo.py
 ```
+Output: condo.csv
 
 ## 2. Extract PLUTO Condo BBLs
 
@@ -63,6 +64,7 @@ as a comma-separated file at a URL that we can retrieve.
 > set TARGETLOGDIR=X:\gis\geodatabase-scripts\logs\condoetl
 > c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat extractpluto.py
 ```
+Output: plutocondo.sql
 
 ## 3. Finalize BBL List and Load to Geodatabase Buildings Schema
 
@@ -75,3 +77,5 @@ PLUTO. Requires a target schema and utilites in [geodatabase-toiler](https://git
 > set PYTHONPATH=%PYTONPATH%;%TOILER%\src\py
 > c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat loadcondo.py
 ```
+Output: Database table "condo"
+

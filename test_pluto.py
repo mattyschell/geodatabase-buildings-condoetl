@@ -10,6 +10,8 @@ class PlutoTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(self):
 
+        self.teardowntestdata = 'Y'
+
         self.datadirectory = os.path.join(pathlib.Path(__file__).parent
                                          ,'data'
                                          ,'testdata')
@@ -19,9 +21,11 @@ class PlutoTestCase(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
+
+        if self.teardowntestdata == 'Y':
+
+            self.testpluto.cleanallfiles()
         
-        pass
-        #self.testpluto.cleanallfiles()
 
     def test_adownload(self):
 

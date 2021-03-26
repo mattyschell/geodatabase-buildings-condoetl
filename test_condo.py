@@ -10,6 +10,8 @@ class CondoTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(self):
 
+        self.teardowntestdata = 'Y'
+
         # mock the SDE environmental ala
         #C:\matt_projects\geodatabase-buildings-condoetl\data\testdata\testdata.gdb\Condo
         self.datadirectory = os.path.join(pathlib.Path(__file__).parent
@@ -20,21 +22,24 @@ class CondoTestCase(unittest.TestCase):
         os.environ["SDEFILE"] = self.testgeodatabase
 
         self.testtable = 'Condo'
-        self.testfile  = 'condotestfile.csv'
         self.testcondo = condo.Condo()
 
 
     @classmethod
     def tearDownClass(self):
-        pass
-        #os.remove(os.path.join(self.datadirectory
-        #                      ,self.testfile))
+        
+        if self.teardowntestdata == 'Y':
+
+            os.remove(os.path.join(self.datadirectory
+                                  ,'condo.csv'))
+
+            os.remove(os.path.join(self.datadirectory
+                                  ,'condo.csv.xml'))
 
     def test_aextract(self):
 
         self.testcondo.extracttofile(self.testtable
-                                    ,self.datadirectory
-                                    ,self.testfile)
+                                    ,self.datadirectory)
 
         self.assertEqual(self.testcondo.countcondos(), 5)
 

@@ -36,7 +36,7 @@ class Condo(object):
     def extracttofile(self
                      ,sourcetable
                      ,targetdirectory
-                     ,targetname):
+                     ,targetname='condo.csv'):
 
         self.condotable = os.path.join(self.sdeconn
                                       ,sourcetable)

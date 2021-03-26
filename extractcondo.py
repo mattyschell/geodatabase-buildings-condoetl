@@ -12,8 +12,7 @@ def main(sourcesdeconn
         sourcecondo = condo.Condo()
 
         sourcecondo.extracttofile('DOF_TAXMAP.Condo'
-                                  ,outputdir
-                                  ,'condo.csv')
+                                  ,outputdir)
 
         return sourcecondo.countcondos()  
 
