@@ -24,7 +24,6 @@ class CondoLoaderTestCase(unittest.TestCase):
 
         self.sdeconn = os.environ['SDEFILE']
 
-        self.testtable = 'Condo'
         self.testcondofile  = 'condo_testfixtures.csv'
         self.testplutosql   = 'plutocondo_testfixtures.sql'
 
@@ -66,30 +65,38 @@ class CondoLoaderTestCase(unittest.TestCase):
             sdereturn = cx_sde.execute_immediate(self.sdeconn
                                                 ,self.teardownsql)
 
+    def test_adatabaseisready(self):
 
-    def test_aloadpluto(self):
+        self.assertTrue(self.testtarget.databaseisready())
 
-        self.testtarget.loadpluto(self.datadirectory)
+    def test_bloadpluto_load(self):
+
+        self.testtarget.loadpluto_load(self.datadirectory)
 
         sql = """select count(*) from pluto_load"""
 
         sdereturn = cx_sde.selectavalue(self.sdeconn,
                                         sql)
     
-        self.assertEqual(sdereturn, 5)
+        self.assertEqual(sdereturn, 4)
 
-    def test_bloadcondo(self):
+    def test_cloadcondo_load(self):
 
-        self.testtarget.loadcondo(self.datadirectory)
+        self.testtarget.loadcondo_load(self.datadirectory)
 
         sql = """select count(*) from condo_load"""
 
         sdereturn = cx_sde.selectavalue(self.sdeconn,
                                         sql)
     
-        self.assertEqual(sdereturn, 5)
+        self.assertEqual(sdereturn, 9)
+    
+    def test_dloadcondo(self):
 
+        self.testtarget.loadcondo()
+    
+        self.assertEqual(self.testtarget.bblcount, 5)
 
-
+    
 if __name__ == '__main__':
     unittest.main()

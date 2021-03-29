@@ -1,6 +1,6 @@
 set PLUTOVERSION=21v1
-set BASEPATH=XXXXX
-set DATABASE=XXXXXXXX
+set BASEPATH=C:\gis\
+set DATABASE=DITGSDV1
 set SDEFILE=%BASEPATH%connections\oracle19c\dev\GIS-%DATABASE%\bldg.sde
 set TOILER=%BASEPATH%geodatabase-toiler\
 set PYTHONPATH=%PYTONPATH%;%TOILER%\src\py

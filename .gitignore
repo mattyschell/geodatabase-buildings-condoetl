@@ -166,6 +166,6 @@ scratch/
 *.csv.xml
 # this repo ESRI detritus
 data/info/
-data/*.ini
+*.ini
 # this repo work files
 data/*.sql

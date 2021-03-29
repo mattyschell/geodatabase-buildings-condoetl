@@ -73,8 +73,7 @@ class Pluto(object):
         with open(self.condosqls, 'w') as f:
             for condo in condos:
                 kount = kount + 1
-                f.write('insert into pluto_load values({0});{1}'.format(condo,'\n'))            
-            f.write('commit;{0}'.format('\n'))
+                f.write('insert into pluto_load values({0}){1}'.format(condo,'\n'))
 
         self.condocount = kount
 
