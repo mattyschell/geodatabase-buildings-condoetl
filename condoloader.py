@@ -26,7 +26,6 @@ class CondoLoader(object):
             
             sql = 'select count(*) from {0} where 1=1 '.format(tablename)
 
-            
             try:
                 kount = cx_sde.selectavalue(self.sdeconn
                                            ,sql)  

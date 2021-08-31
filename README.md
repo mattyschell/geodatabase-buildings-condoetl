@@ -39,9 +39,20 @@ all of the usual licensing, connection files, and data available.
 
 Update the variables at the beginning of the batch file.
 
+Test teardown will drop tables so do not run this in the live production schema.
+
 ```
 > testall.bat
 ```
+
+## 1. First time schema setup
+
+Execute sql_oracle\definition\schema.sql in the target schema.  For example:
+
+```
+sqlplus bldg/ILuvEsri247@database @sql_oracle\definition\initschema.sql
+```
+
 
 ## 1. Extract Taxmap Base BBL, Condo Billing BBLs
 
@@ -60,7 +71,7 @@ Assumes that [PLUTO](https://github.com/NYCPlanning/db-pluto) will be available
 as a comma-separated file at a URL that we can retrieve.
 
 ```
-> set PLUTOVERSION=21v1
+> set PLUTOVERSION=21v2
 > set TARGETLOGDIR=X:\gis\geodatabase-scripts\logs\condoetl
 > c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat extractpluto.py
 ```

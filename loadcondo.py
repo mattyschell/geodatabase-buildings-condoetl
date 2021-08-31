@@ -18,7 +18,13 @@ def main(datadir):
 
     else:
 
-        logging.error('Target database isnt ready, check SDECONN environmental and work tables')
+        readymsg = ("{0}{1}"
+                    "Target database isnt ready, check SDECONN environmental, "
+                    "work tables, schema.sql one time setup{2}{3}".format('\n'
+                                                                         ,'\n'
+                                                                         ,'\n'
+                                                                         ,'\n'))
+        logging.error(readymsg)
         return 0
 
     return target.bblcount
