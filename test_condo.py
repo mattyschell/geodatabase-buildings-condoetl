@@ -18,12 +18,10 @@ class CondoTestCase(unittest.TestCase):
                                          ,'data'
                                          ,'testdata')
         self.testgeodatabase = os.path.join(os.path.abspath(self.datadirectory)
-                                           ,'testdata.gdb')        
-        os.environ["SDEFILE"] = self.testgeodatabase
-
+                                           ,'testdata.gdb')  
+        self.badgeodatabase = os.path.join(os.path.abspath(self.datadirectory)
+                                          ,'doesnotexist.gdb')        
         self.testtable = 'Condo'
-        self.testcondo = condo.Condo()
-
 
     @classmethod
     def tearDownClass(self):
@@ -36,12 +34,30 @@ class CondoTestCase(unittest.TestCase):
             os.remove(os.path.join(self.datadirectory
                                   ,'condo.csv.xml'))
 
-    def test_aextract(self):
+    
+    def test_abadsde(self):
+
+        os.environ["SDEFILE"] = self.badgeodatabase
+        self.testcondo = condo.Condo()
+
+        try:
+            self.testcondo.extracttofile(self.testtable
+                                    ,self.datadirectory)
+        except:
+            badgdb = True
+
+        self.assertTrue(badgdb)
+
+    def test_bextract(self):
+
+        os.environ["SDEFILE"] = self.testgeodatabase
+        self.testcondo = condo.Condo()
 
         self.testcondo.extracttofile(self.testtable
                                     ,self.datadirectory)
 
         self.assertEqual(self.testcondo.countcondos(), 5)
+
 
         # if I decide to clean up weird values in the csv
         # that test goes here next

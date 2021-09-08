@@ -45,9 +45,10 @@ Test teardown will drop tables so do not run this in the live production schema.
 > testall.bat
 ```
 
-## 1. First time schema setup
+## First time schema setup
 
-Execute sql_oracle\definition\schema.sql in the target schema.  For example:
+Execute sql_oracle\definition\schema.sql in the target schema.  For example,
+sqlplus-ified:
 
 ```
 sqlplus bldg/ILuvEsri247@database @sql_oracle\definition\initschema.sql
