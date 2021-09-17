@@ -8,7 +8,15 @@ class CondoLoader(object):
 
     def __init__(self):
 
-        self.sdeconn = os.environ['SDEFILE']
+        
+        if os.path.exists(os.environ['SDEFILE']):
+
+            self.sdeconn = os.environ['SDEFILE']
+
+        else:
+
+            raise ValueError('{0} is not a valid sde file'.format(os.environ['SDEFILE']))
+        
         #load our extracted data into these two
         self.condoloadtable = 'condo_load'
         self.plutoloadtable = 'pluto_load'

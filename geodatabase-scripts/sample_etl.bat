@@ -1,18 +1,18 @@
 REM I dunno are these sensitive?
-set HTTP_PROXY=http://xxpxyxx.nycnet:xxxx
-set HTTPS_PROXY=http://xxpxyxx.nycnet:xxxx
+set HTTP_PROXY=http://XXXXX.xxxxxx:8080
+set HTTPS_PROXY=http://XXXXX.xxxxxx:8080
 REM update the first 3
 set PLUTOVERSION=21v2
-set DATABASE=DITGSDV1
+set DATABASE=XXXXXXXX1
 set ENV=DEV
 REM unmask the next 4
-set NOTIFY=xxxx@xxxxx.nyc.gov,xxxx@xxxxx.nyc.gov
-set NOTIFYFROM=xxx-xxxxxxx@xxxxx.nyc.gov
-set SMTPFROM=xxxxxxxxx.xxxxxx
-set BASEPATH=C:\xxx\
+set NOTIFY=xxxx@xxxxx.nyc.gov
+set NOTIFYFROM=xxxxxx@xxxxx.nyc.gov
+set SMTPFROM=xxxxxxxxxx.nycnet
+set BASEPATH=C:\xxxx\
 REM review the rest
 REM dof_taxmap@geocdev is in bad shape, we must use staging here in dev to get anything
-set SDEFILE=%BASEPATH%connections\oracle11g\%ENV%\dof_readonly.sde
+set SDEFILE=%BASEPATH%connections\oracle11g\%ENV%\xxx.sde
 set TARGETSDEFILE=%BASEPATH%connections\oracle19c\%ENV%\GIS-%DATABASE%\bldg.sde
 set TOILER=%BASEPATH%geodatabase-toiler\
 set PYTHONPATH=%PYTHONPATH%;%TOILER%\src\py

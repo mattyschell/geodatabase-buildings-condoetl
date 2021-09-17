@@ -24,6 +24,11 @@ class CondoLoaderTestCase(unittest.TestCase):
 
         self.sdeconn = os.environ['SDEFILE']
 
+        self.badsdeconn =  os.path.join(pathlib.Path(__file__).parent
+                                       ,'data'
+                                       ,'testdata'
+                                       ,'phony.sde')
+
         self.testcondofile  = 'condo_testfixtures.csv'
         self.testplutosql   = 'plutocondo_testfixtures.sql'
 
@@ -65,11 +70,20 @@ class CondoLoaderTestCase(unittest.TestCase):
             sdereturn = cx_sde.execute_immediate(self.sdeconn
                                                 ,self.teardownsql)
 
-    def test_adatabaseisready(self):
+    
+    def test_agracefulfailonbadinputs(self):
+
+        os.environ['SDEFILE'] = self.badsdeconn
+
+        self.testtarget = condoloader.CondoLoader()
+        
+        self.assertFalse(self.testtarget.databaseisready())
+    
+    def test_bdatabaseisready(self):
 
         self.assertTrue(self.testtarget.databaseisready())
 
-    def test_bloadpluto_load(self):
+    def test_cloadpluto_load(self):
 
         self.testtarget.loadpluto_load(self.datadirectory)
 
@@ -80,7 +94,7 @@ class CondoLoaderTestCase(unittest.TestCase):
     
         self.assertEqual(sdereturn, 4)
 
-    def test_cloadcondo_load(self):
+    def test_dloadcondo_load(self):
 
         self.testtarget.loadcondo_load(self.datadirectory)
 
@@ -91,7 +105,7 @@ class CondoLoaderTestCase(unittest.TestCase):
     
         self.assertEqual(sdereturn, 9)
     
-    def test_dloadcondo(self):
+    def test_eloadcondo(self):
 
         self.testtarget.loadcondo()
     

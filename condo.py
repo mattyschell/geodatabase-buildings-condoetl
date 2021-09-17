@@ -6,7 +6,13 @@ class Condo(object):
 
     def __init__(self):
 
-        self.sdeconn = os.environ['SDEFILE']
+        if os.path.exists(os.environ['SDEFILE']):
+
+            self.sdeconn = os.environ['SDEFILE']
+
+        else:
+
+            raise ValueError('{0} is not a valid sde file'.format(os.environ['SDEFILE']))
 
     def getsimplefieldmap(self
                          ,fields):

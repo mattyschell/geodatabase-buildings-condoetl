@@ -38,11 +38,11 @@ class CondoTestCase(unittest.TestCase):
     def test_abadsde(self):
 
         os.environ["SDEFILE"] = self.badgeodatabase
-        self.testcondo = condo.Condo()
+
+        badgdb = False
 
         try:
-            self.testcondo.extracttofile(self.testtable
-                                    ,self.datadirectory)
+            self.testcondo = condo.Condo()
         except:
             badgdb = True
 
