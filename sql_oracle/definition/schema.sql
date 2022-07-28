@@ -6,7 +6,7 @@ begin
     psql := 'create table condo ( '
          || '   condo_base_bbl      number(10,0) '
          || '  ,condo_billing_bbl   number(10,0) '
-         || '  ,primary key (condo_base_bbl, condo_billing_bbl)'
+         || '  ,primary key (condo_base_bbl)'
          || ')';
     execute immediate psql;
     psql := 'create table condo_load ( '

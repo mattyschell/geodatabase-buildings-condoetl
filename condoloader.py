@@ -88,6 +88,18 @@ class CondoLoader(object):
 
         self.delete(self.condotable)
 
+        #clean junk from dept of finance condo inputs
+        # https://github.com/mattyschell/geodatabase-buildings-condoetl/issues/5
+
+        sql  = 'delete from {0} '.format(self.condoloadtable) 
+        sql += 'where rowid not in '
+        sql += '(select min(rowid) '
+        sql += 'from {0} a '.format(self.condoloadtable)
+        sql += 'group by a.condo_base_bbl) '
+              
+        sdereturn = cx_sde.execute_immediate(self.sdeconn
+                                            ,sql)  
+
         # insert into condo
         #   (condo_base_bbl
         #   ,condo_billing_bbl)
@@ -101,6 +113,8 @@ class CondoLoader(object):
         # on 
         # a.condo_billing_bbl = b.bbl
         
+        # distinct is no longer necessary I think after
+        # cleaning above
         sql  = 'insert into {0} '.format(self.condotable) 
         sql += '(condo_base_bbl ,condo_billing_bbl) '
         sql += 'select distinct a.condo_base_bbl, a.condo_billing_bbl '
