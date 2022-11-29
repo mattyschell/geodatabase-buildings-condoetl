@@ -12,7 +12,7 @@ class Pluto(object):
                 ,workdirectory):
 
         self.version = os.environ['PLUTOVERSION']
-        self.url = 'https://www1.nyc.gov/assets/planning/download/zip/data-maps/open-data/nyc_pluto_{0}_csv.zip'.format(self.version)
+        self.url = 'https://s-media.nyc.gov/agencies/dcp/assets/files/zip/data-tools/bytes/nyc_pluto_{0}_csv.zip'.format(self.version)
         self.workdirectory = workdirectory
 
         # set these once in init for cleaner setup teardown
