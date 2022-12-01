@@ -10,9 +10,17 @@ def main(outputdir):
 
         sourcepluto = pluto.Pluto(outputdir)
 
+        retval = 0
         # drop sql into \data directory 
         # return kount of condos in pluto, around 10k
-        return sourcepluto.downloadextractcondosql() 
+        try:
+            retval = sourcepluto.downloadextractcondosql() 
+        except Exception as e: logging.error(e)
+            # urllib.error.URLError: 
+            # <urlopen error Tunnel connection failed: 407 Proxy Authentication Required>
+            #logging.error('Pluto module failed to get any records')        
+        finally:
+            return retval
 
 
 if __name__ == '__main__':
