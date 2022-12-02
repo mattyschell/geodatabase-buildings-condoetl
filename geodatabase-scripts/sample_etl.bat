@@ -1,8 +1,8 @@
 REM I dunno are these sensitive?
-set HTTP_PROXY=http://XXXXX.xxxxxx:8080
-set HTTPS_PROXY=http://XXXXX.xxxxxx:8080
+set HTTP_PROXY=http://domain\user:pass@XXXXX.xxxxxx:1234
+set HTTPS_PROXY=http://domain\user:pass@XXXXX.xxxxxx:1234
 REM update the first 3
-set PLUTOVERSION=21v2
+set PLUTOVERSION=22v3
 set DATABASE=XXXXXXXX1
 set ENV=DEV
 REM unmask the next 4
