@@ -10,6 +10,10 @@ class Condo(object):
 
             self.sdeconn = os.environ['SDEFILE']
 
+        elif os.environ['SDEFILE'].startswith('http'):
+
+            self.sdeconn = os.environ['SDEFILE']
+
         else:
 
             raise ValueError('{0} is not a valid sde file'.format(os.environ['SDEFILE']))
@@ -59,4 +63,3 @@ class Condo(object):
                                      ,targetname
                                      ,"""CONDO_BASE_BBL IS NOT NULL AND CONDO_BILLING_BBL IS NOT NULL"""
                                      ,self.getsimplefieldmap(['CONDO_BASE_BBL','CONDO_BILLING_BBL']))
-        

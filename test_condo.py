@@ -23,6 +23,9 @@ class CondoTestCase(unittest.TestCase):
                                           ,'doesnotexist.gdb')        
         self.testtable = 'Condo'
 
+        self.testhostedurl = "https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/v_PIP_SCAR_Tables_view/FeatureServer/"
+        self.testhostedlayer = '1'
+
     @classmethod
     def tearDownClass(self):
         
@@ -58,9 +61,17 @@ class CondoTestCase(unittest.TestCase):
 
         self.assertEqual(self.testcondo.countcondos(), 5)
 
+    def test_cextracthostedcondo(self):
 
-        # if I decide to clean up weird values in the csv
-        # that test goes here next
+        # mimic expected x:\path\database.sde\table 
+        # with https:\pathtoservice\layer
+        os.environ["SDEFILE"] = self.testhostedurl
+        self.testcondo = condo.Condo()
+
+        self.testcondo.extracttofile(self.testhostedlayer
+                                    ,self.datadirectory)
+        
+        self.assertGreater(self.testcondo.countcondos(), 0)
 
 
 if __name__ == '__main__':

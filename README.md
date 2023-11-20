@@ -7,7 +7,7 @@ We will refresh the NYC Office of Technology and Innovation condo dataset with e
 
 ## Inputs and Dependencies
 
-* SDE file connection to the source DOF_READONLY oracle schema
+* Access to the Department of Finance hosted feature table CONDO
 * SDE file connection to the target [geodatabase-buildings](https://github.com/mattyschell/geodatabase-buildings) 
 * [ESRI ArcGIS Pro python 3.x](https://pro.arcgis.com/en/pro-app/arcpy/get-started/installing-python-for-arcgis-pro.htm) 
 * [Geodatabase Toiler](https://github.com/mattyschell/geodatabase-toiler) repository
