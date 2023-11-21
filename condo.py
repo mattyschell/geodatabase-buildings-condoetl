@@ -1,4 +1,5 @@
 import os
+import posixpath
 import arcpy
 import csv
 
@@ -12,8 +13,13 @@ class Condo(object):
 
         elif os.environ['SDEFILE'].startswith('http'):
 
-            self.sdeconn = os.environ['SDEFILE']
+            # should have followed the wisdom of the ancients
+            # and simply called SDEFILE "the containah" 
 
+            self.sdeconn = r"{0}".format(os.environ['SDEFILE'])
+            # force a url / here, dont let os.path manage below
+            self.sdeconn = posixpath.join(self.sdeconn,'')
+ 
         else:
 
             raise ValueError('{0} is not a valid sde file'.format(os.environ['SDEFILE']))
@@ -50,6 +56,8 @@ class Condo(object):
 
         self.condotable = os.path.join(self.sdeconn
                                       ,sourcetable)
+        
+        #print("condotable joined is {0}".format(self.condotable))
 
         self.condocsv = os.path.join(targetdirectory
                                     ,targetname)

@@ -11,8 +11,8 @@ set NOTIFYFROM=xxxxxx@xxxxx.nyc.gov
 set SMTPFROM=xxxxxxxxxx.nycnet
 set BASEPATH=C:\xxxx\
 REM review the rest
-REM dof_taxmap@geocdev is in bad shape, we must use staging here in dev to get anything
-set SDEFILE=%BASEPATH%connections\oracle11g\%ENV%\xxx.sde
+REM more like SDE CONTAINAH am I right?
+set SDEFILE=https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/v_PIP_SCAR_Tables_view/FeatureServer/
 set TARGETSDEFILE=%BASEPATH%connections\oracle19c\%ENV%\GIS-%DATABASE%\bldg.sde
 set TOILER=%BASEPATH%geodatabase-toiler\
 set PYTHONPATH=%PYTHONPATH%;%TOILER%\src\py

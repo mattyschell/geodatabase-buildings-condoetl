@@ -4,7 +4,6 @@ import pathlib
 
 import condo
 
-
 class CondoTestCase(unittest.TestCase):
 
     @classmethod
@@ -23,7 +22,10 @@ class CondoTestCase(unittest.TestCase):
                                           ,'doesnotexist.gdb')        
         self.testtable = 'Condo'
 
-        self.testhostedurl = "https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/v_PIP_SCAR_Tables_view/FeatureServer/"
+        # we are unit testing with the real production service
+        # seems bad!
+        self.testhostedurl   = "https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/v_PIP_SCAR_Tables_view/FeatureServer/"
+        self.testhostedurl2  = self.testhostedurl.rstrip('/')
         self.testhostedlayer = '1'
 
     @classmethod
@@ -36,7 +38,6 @@ class CondoTestCase(unittest.TestCase):
 
             os.remove(os.path.join(self.datadirectory
                                   ,'condo.csv.xml'))
-
     
     def test_abadsde(self):
 
@@ -64,8 +65,21 @@ class CondoTestCase(unittest.TestCase):
     def test_cextracthostedcondo(self):
 
         # mimic expected x:\path\database.sde\table 
-        # with https:\pathtoservice\layer
+        # with https:\pathtoservice\layer\
         os.environ["SDEFILE"] = self.testhostedurl
+        self.testcondo = condo.Condo()
+
+        self.testcondo.extracttofile(self.testhostedlayer
+                                    ,self.datadirectory)
+        
+        self.assertGreater(self.testcondo.countcondos(), 0)
+
+    def test_dextracthostedcondo2(self):
+
+        # mimic expected x:\path\database.sde\table 
+        # with https:\pathtoservice\layer
+        # no closing slash
+        os.environ["SDEFILE"] = self.testhostedurl2
         self.testcondo = condo.Condo()
 
         self.testcondo.extracttofile(self.testhostedlayer

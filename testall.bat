@@ -1,6 +1,8 @@
-set PLUTOVERSION=21v2
-set BASEPATH=C:\xxx\
-set DATABASE=XXXXXXX1
+set PLUTOVERSION=23v3
+set BASEPATH=X:\gis\
+set DATABASE=xxxx
+REM HTTP_PROXY=http://domain\account:password@proxy.xxx:port
+REM set HTTP_PROXY=%HTTP_PROXY%
 REM SDEFILE for condoloader target only, use a mock file gdb for inputs 
 set SDEFILE=%BASEPATH%connections\oracle19c\dev\GIS-%DATABASE%\bldg.sde
 set TOILER=%BASEPATH%geodatabase-toiler\
