@@ -1,4 +1,5 @@
 import os
+import sys
 import logging
 import time
 import pathlib
@@ -6,19 +7,27 @@ import pathlib
 import condo
 
 
-def main(sourcesdeconn
-        ,outputdir):
+def main(outputdir
+        ,sourcelayer): 
+
+        # sourcelayer is either (sdefile.sde/+)  this: <<schema.table>>
+        # or          (http:/url/FeatureServer+) this: <<1>>
 
         sourcecondo = condo.Condo()
 
-        sourcecondo.extracttofile('DOF_TAXMAP.Condo'
-                                  ,outputdir)
+        sourcecondo.extracttofile(sourcelayer
+                                 ,outputdir)
 
         return sourcecondo.countcondos()  
 
 
 if __name__ == '__main__':
 
+    if len(sys.argv) > 1:
+        psourcelayer =  sys.argv[1]
+    else:
+        psourcelayer = 'DOF_TAXMAP.CONDO'
+         
     psourcesdeconn = os.environ['SDEFILE']
         
     timestr = time.strftime("%Y%m%d-%H%M%S")
@@ -38,15 +47,10 @@ if __name__ == '__main__':
     datadir = os.path.join(pathlib.Path(__file__).parent
                           ,'data')
 
-    if not os.path.isfile(psourcesdeconn):
-        logging.error("Condo source sde file {0} does not exist, "
-                      "check SDEFILE environmental".format(psourcesdeconn))
-        exit(retval)
+    kount = main(datadir
+                ,psourcelayer)
 
-    kount = main(psourcesdeconn
-                ,datadir)
-
-    # at this point our csv still has two bad duplicate types
+    # at this point our csv still likely has two bad duplicate types
     # condo_base_bbl condo_billing_bbl
     #      A               X
     #      A               X

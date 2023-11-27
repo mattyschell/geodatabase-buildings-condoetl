@@ -30,6 +30,9 @@ class Condo(object):
         # our source is a versioned geodatabase with no SQL access
         # https://pro.arcgis.com/en/pro-app/latest/arcpy/classes/fieldmappings.htm
         fms = arcpy.FieldMappings()
+
+        # thank you for continuing to work on hosted feature tables
+        # and also F you for being like this in the first place 
         
         for field in fields:
             fm_field = arcpy.FieldMap()
