@@ -13,6 +13,7 @@ set BASEPATH=C:\xxxx\
 REM review the rest
 REM more like SDE CONTAINAH am I right?
 set SDEFILE=https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/v_PIP_SCAR_Tables_view/FeatureServer/
+set HOSTEDLAYER=1
 set TARGETSDEFILE=%BASEPATH%connections\oracle19c\%ENV%\GIS-%DATABASE%\bldg.sde
 set TOILER=%BASEPATH%geodatabase-toiler\
 set PYTHONPATH=%PYTHONPATH%;%TOILER%\src\py
@@ -21,15 +22,16 @@ set BATLOG=%TARGETLOGDIR%geodatabase-buildings-condoetl.log
 set ETL=%BASEPATH%geodatabase-buildings-condoetl\
 set PROPY=c:\Progra~1\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\python.exe
 echo starting refresh of condo table in %TARGETSDEFILE% on %date% at %time% > %BATLOG%
-%PROPY% %ETL%extractcondo.py && (
+echo starting refresh of condo table in %TARGETSDEFILE% on %date% at %time% > %BATLOG%
+%PROPY% %ETL%extractcondo.py %HOSTEDLAYER% && (
   echo extracted DOF condos from %SDEFILE% on %date% at %time% >> %BATLOG%
 ) || (
   %PROPY% %ETL%notify.py ": Failed to extract DOF condos from %SDEFILE%" %NOTIFY% "extractcondo" && EXIT /B 1
 )  
 %PROPY% %ETL%extractpluto.py && (
-  echo extracted pluto condos from %PLUTOVERSION% on %date% at %time% >> %BATLOG%
+    echo extracted pluto condos from %PLUTOVERSION% on %date% at %time% >> %BATLOG%
 ) || (
-  %PROPY% %ETL%notify.py ": Failed to extract pluto condos from %PLUTOVERSION%" %NOTIFY% "extractpluto" && EXIT /B 1
+    %PROPY% %ETL%notify.py ": Failed to extract pluto condos from %PLUTOVERSION%" %NOTIFY% "extractpluto" && EXIT /B 1
 ) 
 SET SDEFILE=%TARGETSDEFILE%
 %PROPY% %ETL%loadcondo.py && (
