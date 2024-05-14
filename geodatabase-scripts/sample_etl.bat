@@ -11,8 +11,8 @@ set SMTPFROM=xxxxxxxxxx.nycnet
 set BASEPATH=C:\xxxx\
 REM review the rest
 REM more like SDE CONTAINAH am I right?
-set SDEFILE=https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/Digital_Tax_Map_VIEW/FeatureServer/
-set HOSTEDLAYER=7
+set SDEFILE=https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/DTM_ETL_DAILY_view/FeatureServer/
+set HOSTEDLAYER=3
 set TARGETSDEFILE=%BASEPATH%connections\oracle19c\%ENV%\GIS-%DATABASE%\bldg.sde
 set TOILER=%BASEPATH%geodatabase-toiler\
 set PYTHONPATH=%PYTHONPATH%;%TOILER%\src\py
