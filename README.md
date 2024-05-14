@@ -1,9 +1,9 @@
 # geodatabase-buildings-condoetl
 
-Refreshes the condo dataset in [geodatabase-buildings](https://github.com/mattyschell/geodatabase-buildings) using inputs from the NYC Dept. of Finance [Digital Tax Map](http://gis.nyc.gov/taxmap/map.htm) and NYC Dept. of City Planning [PLUTO](https://github.com/NYCPlanning/db-pluto). 
+Refreshes the condo dataset in [geodatabase-buildings](https://github.com/mattyschell/geodatabase-buildings) using inputs from the NYC Dept. of Finance [Property Information Portal](https://propertyinformationportal.nyc.gov/) and NYC Dept. of City Planning [PLUTO](https://github.com/NYCPlanning/db-pluto). 
 Friends, this our condo dataset refresh using two agency inputs, our rules, the trick is never to be afraid.
 
-We will refresh the NYC Office of Technology and Innovation condo dataset with each PLUTO release from the Dept. of City Planning, matching PLUTO to current Dept. of Finance Condos. We update DoITT's live buildings with all condominium "billing" boro/block/lots daily, so DoITT buildings will always reflect the latest legal MapPLUTO values. 
+We will refresh the NYC Office of Technology and Innovation condo dataset with each PLUTO release from the Dept. of City Planning, matching PLUTO to current Dept. of Finance Condos. We update OTI's live buildings with all condominium "billing" boro/block/lots daily, so OTI's buildings will always reflect the latest legal MapPLUTO values. 
 
 ## Inputs and Dependencies
 
