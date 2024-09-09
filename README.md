@@ -25,13 +25,13 @@ Update the variables at the beginning of geodatabase-scripts\sample_etl.bat and 
 
 ## Tests
 
-This is a poorly designed combination of integration tests and regression tests. You probably only want to run this if you work on the DoITT GIS team and have all of the usual licensing, connection files, and data available. 
+This is a poorly designed combination of integration tests and regression tests. You probably only want to run this if you have all of the usual licensing, connection files, and data available. 
 
 Update the variables at the beginning of the batch file.
 
 
 ```
-> REM Test teardown will drop tables so do not run this in the live production schema.
+> REM Test teardown will drop tables so do not run this anywhere important
 > testall.bat
 ```
 
@@ -48,7 +48,7 @@ sqlplus bldg/ILuvEsri247@database @sql_oracle\definition\initschema.sql
 The source Dept. of Finance data may move so this step must be loosely coupled.
 
 ```
-> set SDEFILE=X:\xxx\connections\oracle11g\dev\dof_readonly.sde
+> set SDEFILE=https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/v_PIP_SCAR_Tables_view/FeatureServer/
 > set TARGETLOGDIR=X:\xxx\geodatabase-scripts\logs\condoetl
 > c:\Progra~1\ArcGIS\Pro\bin\Python\scripts\propy.bat extractcondo.py
 ```
@@ -67,7 +67,7 @@ Output: plutocondo.sql
 
 ## 3. Finalize BBL List and Load to Geodatabase Buildings Schema
 
-Refresh the DoITT condo table with Dept. of Finance condos that also exist in PLUTO. Requires a target schema and utilites in [geodatabase-toiler](https://github.com/mattyschell/geodatabase-toiler).
+Refresh the database condo table with Dept. of Finance condos that also exist in PLUTO. Requires a target schema and utilites in [geodatabase-toiler](https://github.com/mattyschell/geodatabase-toiler).
 
 ```
 > set SDEFILE=X:\gis\connections\xx\xxx.sde

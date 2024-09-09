@@ -78,9 +78,12 @@ class CondoLoader(object):
                     kount += 1
                 else:
                     kount += 1
-                    sqls.append('insert into {0} values({1},{2}) '.format(self.condoloadtable
-                                                                         ,row[1]
-                                                                         ,row[2]))
+                    if not any(elem is None or elem == '' for elem in row):
+                        # https://github.com/mattyschell/geodatabase-buildings-condoetl/issues/15
+                        sqls.append('insert into {0} values({1},{2}) '.format(self.condoloadtable
+                                                                             ,row[1]
+                                                                             ,row[2]))
+
         sdereturn = cx_sde.execute_statements(self.sdeconn
                                              ,sqls)        
  
@@ -88,7 +91,8 @@ class CondoLoader(object):
 
         self.delete(self.condotable)
 
-        #clean junk from dept of finance condo inputs
+        # clean junk from dept of finance condo inputs
+        # (this may not really be junk to the dept of finance)
         # https://github.com/mattyschell/geodatabase-buildings-condoetl/issues/5
 
         sql  = 'delete from {0} '.format(self.condoloadtable) 

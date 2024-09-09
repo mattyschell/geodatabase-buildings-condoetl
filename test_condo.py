@@ -22,8 +22,8 @@ class CondoTestCase(unittest.TestCase):
                                           ,'doesnotexist.gdb')        
         self.testtable = 'Condo'
 
-        # we are unit testing with the real production service
-        # seems bad!
+        # we are testing with the real production service
+        # not great!
         self.testhostedurl   = "https://services6.arcgis.com/yG5s3afENB5iO9fj/arcgis/rest/services/v_PIP_SCAR_Tables_view/FeatureServer/"
         self.testhostedurl2  = self.testhostedurl.rstrip('/')
         self.testhostedlayer = '1'
@@ -52,15 +52,8 @@ class CondoTestCase(unittest.TestCase):
 
         self.assertTrue(badgdb)
 
-    def test_bextract(self):
-
-        os.environ["SDEFILE"] = self.testgeodatabase
-        self.testcondo = condo.Condo()
-
-        self.testcondo.extracttofile(self.testtable
-                                    ,self.datadirectory)
-
-        self.assertEqual(self.testcondo.countcondos(), 5)
+    # removed test to extract condos from a database
+    # source is a service as of 2024
 
     def test_cextracthostedcondo(self):
 
