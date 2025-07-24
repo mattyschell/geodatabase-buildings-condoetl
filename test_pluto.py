@@ -42,6 +42,13 @@ class PlutoTestCase(unittest.TestCase):
         self.testpluto.extractcondosql()
         self.assertTrue(pathlib.Path(self.testpluto.condosqls).is_file())
 
+    def test_dbadplutoerrors(self):
+
+        os.environ['PLUTOVERSION'] = 'BADPLUTOVERSION'
+        self.testpluto = pluto.Pluto(self.datadirectory)
+
+        with self.assertRaises(RuntimeError) as context:
+            self.testpluto.download()
     
 if __name__ == '__main__':
     unittest.main()

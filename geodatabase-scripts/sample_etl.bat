@@ -1,10 +1,8 @@
 set HTTP_PROXY=http://domain\user:pass@XXXXX.xxxxxx:1234
 set HTTPS_PROXY=%HTTP_PROXY%
-REM update the first 3
-set PLUTOVERSION=24v1_1
+set PLUTOVERSION=25v2
 set DATABASE=XXXXXXXX1
 set ENV=DEV
-REM unmask the next 4
 set NOTIFY=xxxx@xxxxx.nyc.gov
 set NOTIFYFROM=xxxxxx@xxxxx.nyc.gov
 set SMTPFROM=xxxxxxxxxx.nycnet

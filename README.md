@@ -1,9 +1,13 @@
 # geodatabase-buildings-condoetl
 
-Refreshes the condo dataset in [geodatabase-buildings](https://github.com/mattyschell/geodatabase-buildings) using inputs from the NYC Dept. of Finance [Property Information Portal](https://propertyinformationportal.nyc.gov/) and NYC Dept. of City Planning [PLUTO](https://github.com/NYCPlanning/db-pluto). 
+Refreshes the condo dataset in [geodatabase-buildings](https://github.com/mattyschell/geodatabase-buildings) using inputs from the NYC Department of Finance [Property Information Portal](https://propertyinformationportal.nyc.gov/) and NYC Department of City Planning [PLUTO](https://github.com/NYCPlanning/db-pluto). 
 Friends, this our condo dataset refresh using two agency inputs, our rules, the trick is never to be afraid.
 
-We will refresh the NYC Office of Technology and Innovation condo dataset with each PLUTO release from the Dept. of City Planning, matching PLUTO to current Dept. of Finance Condos. We update OTI's live buildings with all condominium "billing" boro/block/lots daily, so OTI's buildings will always reflect the latest legal MapPLUTO values. 
+The NYC Office of Technology and Innovations maintains the citywide dataset of building footprints.  One attribute of a building footprint is the building tax lot. The base tax lot (aka "base bbl") is easy to determine. You can see it in GIS software and other city agencies record it.
+
+When a building is also associated with a condo tax lot (aka "billing bbl") this is less obvious. Billing BBLs are the only tax lot in the Department of City Planning PLUTO and MapPLUTO datasets.  The only way to join buildings footprints to PLUTO is with this billing BBL. 
+
+Each business day we refresh the NYC Office of Technology and Innovation condo dataset. We use the latest PLUTO from the Department of City Planning, matching PLUTO BBLs to current Department of Finance condominiums. We update OTI's live buildings with all condominium "billing" boro/block/lots daily, so OTI's building "billing bbls" will always reflect the latest legal PLUTO and MapPLUTO values. 
 
 ## Inputs and Dependencies
 
@@ -11,8 +15,8 @@ We will refresh the NYC Office of Technology and Innovation condo dataset with e
 * SDE file connection to the target [geodatabase-buildings](https://github.com/mattyschell/geodatabase-buildings) 
 * [ESRI ArcGIS Pro python 3.x](https://pro.arcgis.com/en/pro-app/arcpy/get-started/installing-python-for-arcgis-pro.htm) 
 * [Geodatabase Toiler](https://github.com/mattyschell/geodatabase-toiler) repository
-* Internet access to the Department of City Planning downloads page like:
-    * https://www1.nyc.gov/assets/planning/download/zip/data-maps/open-data/nyc_pluto_YYvX_csv.zip
+* Internet access to the Department of City Planning [PLUTO](https://www.nyc.gov/content/planning/pages/resources/datasets/mappluto-pluto-change) like:
+    * https://s-media.nyc.gov/agencies/dcp/assets/files/zip/data-tools/bytes/pluto/nyc_pluto_25v2_csv.zip
 
 
 ## Full ETL

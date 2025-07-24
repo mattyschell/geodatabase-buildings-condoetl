@@ -1,10 +1,9 @@
 import os
-# pandas is in Propy env, see reqs
+# pandas is in Propy env, see requirements
 import pandas 
 import urllib.request
+import urllib.error
 import zipfile
-
-# Authors: DuckDuckGo and StackOverflow.  Legends.
 
 class Pluto(object):
 
@@ -12,7 +11,8 @@ class Pluto(object):
                 ,workdirectory):
 
         self.version = os.environ['PLUTOVERSION']
-        self.url = 'https://s-media.nyc.gov/agencies/dcp/assets/files/zip/data-tools/bytes/nyc_pluto_{0}_csv.zip'.format(self.version)
+        self.url = 'https://s-media.nyc.gov/agencies/dcp/assets/files/zip/data-tools/bytes/pluto/nyc_pluto_{0}_csv.zip'.format(self.version)
+
         self.workdirectory = workdirectory
 
         # set these once in init for cleaner setup teardown
@@ -39,8 +39,18 @@ class Pluto(object):
         if os.path.exists(self.plutocsv):
             os.remove(self.plutocsv)
 
-        urllib.request.urlretrieve(self.url
-                                  ,self.zippath)
+        try:
+            urllib.request.urlretrieve(self.url
+                                      ,self.zippath)
+
+        except urllib.error.URLError as e:
+            # this is where we have problems
+            raise RuntimeError(f"HTTP error while retrieving URL '{self.url}': {e.code} {e.reason}") from e
+        except urllib.error.HTTPError as e:
+            raise RuntimeError(f"Failed to retrieve URL '{self.url}': {e.reason}") from e
+        except Exception as e:
+            raise RuntimeError(f"Unexpected error while retrieving URL '{self.url}': {e}") from e
+
         self.unzip()
 
         os.remove(self.zippath)
